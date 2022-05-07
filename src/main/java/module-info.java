@@ -1,9 +1,9 @@
-module com.example.se1 {
+module com.example.dobble {
     requires javafx.controls;
     requires javafx.fxml;
-    requires java.logging;
 
+    requires org.kordamp.ikonli.javafx;
 
-    opens com.example.se1 to javafx.fxml;
-    exports com.example.se1;
+    opens com.example.dobble to javafx.fxml;
+    exports com.example.dobble;
 }
