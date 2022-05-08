@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
-
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.dobble.HelloController">
    <children>
       <Circle fill="DODGERBLUE" layoutX="163.0" layoutY="150.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
+      <Button fx:id="icon1" layoutX="100.0" layoutY="95.0" mnemonicParsing="false" onAction="#sendToServer" text="Icon1" />
+      <Button layoutX="175.0" layoutY="109.0" mnemonicParsing="false" text="Icon2" />
+      <Button layoutX="91.0" layoutY="150.0" mnemonicParsing="false" text="Icon3" />
+      <Button layoutX="175.0" layoutY="164.0" mnemonicParsing="false" text="Icon4" />
       <Circle fill="DODGERBLUE" layoutX="413.0" layoutY="157.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
    </children>
 </AnchorPane>

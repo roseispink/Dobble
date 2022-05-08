@@ -8,6 +8,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public class HelloController {
@@ -30,9 +33,14 @@ public class HelloController {
     @FXML
     private Label title;
 
+    @FXML
+    private Button icon1;
+
     Stage stage = new Stage();
     Socket socketIn;
     Socket socketOut;
+    private ObjectInputStream inputStream;
+    private ObjectOutputStream outputStream;
 
     @FXML
     void closeGame(ActionEvent event) {
@@ -65,10 +73,24 @@ public class HelloController {
 
     }
 
+
+    @FXML
+    void sendToServer(ActionEvent event) {
+        if(outputStream!=null){
+            try {
+                outputStream.writeChars(icon1.getText());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     void connect(){
         try {
             socketIn = new Socket("localhost", 7); // do odczytu
             socketOut = new Socket("localhost", 7); //do zapisu
+            inputStream = new ObjectInputStream(socketIn.getInputStream());
+            outputStream = new ObjectOutputStream(socketOut.getOutputStream());
         }catch (Exception e){
             e.printStackTrace();
         }
