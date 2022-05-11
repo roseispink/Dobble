@@ -28,7 +28,7 @@
          <children>
             <ImageView fx:id="instruction" accessibleRole="BUTTON" fitHeight="42.0" fitWidth="33.0" onMouseClicked="#showInstruction" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <image>
-                  <Image url="@../../../../../../question-mark.png" />
+                  <Image url="@question-mark.png" />
                </image>
                <viewport>
                   <Rectangle2D height="50.0" minX="2.0" minY="2.0" />

@@ -14,5 +14,8 @@ public class MainGame extends Application {
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
+        Connect cn = new Connect();
+        cn.connect();
+        cn.sendToServer("Hello");
     }
 }
