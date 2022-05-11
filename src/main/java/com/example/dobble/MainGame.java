@@ -10,8 +10,7 @@ public class MainGame extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(MainGame.class.getResource("main-game-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
-        stage.setTitle("Hello!");
+        Scene scene = new Scene(fxmlLoader.load(), 1200, 780);
         stage.setScene(scene);
         stage.show();
         Connect cn = new Connect();

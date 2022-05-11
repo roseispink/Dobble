@@ -1,0 +1,13 @@
+.root{
+    -fx-background: rgb(240, 193, 190);
+}
+
+.button{
+    -fx-background: rgb(97, 108, 188);
+}
+
+.label{
+    -fx-font-size: 40pt ;
+    -fx-text-alignment: center ;
+    -fx-font-family: "Arial";
+}
