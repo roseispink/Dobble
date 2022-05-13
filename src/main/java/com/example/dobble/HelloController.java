@@ -21,6 +21,7 @@ import java.net.Socket;
         private Button mainGameB;
         Stage stage = new Stage();
 
+
         @FXML
         void startMainGame(MouseEvent event) {
             try {

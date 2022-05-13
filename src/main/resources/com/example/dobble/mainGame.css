@@ -6,18 +6,18 @@
     -fx-font-size: 18pt ;
     -fx-text-alignment: center ;
     -fx-font-family: "Arial";
-    -fx-font-style: border;
+    //font-style>: border;
     -fx-text-fill: white;
 }
 
 .button{
-    -fx-background: rgb(97, 108, 188);
+    -fx-background-color: rgb(97, 108, 188);
 }
 
 .label1{
     -fx-font-size: 40pt ;
     -fx-text-alignment: center ;
     -fx-font-family: "Arial";
-    -fx-font-style: border;
+    //-fx-font-style: border;
     -fx-text-fill: white;
 }

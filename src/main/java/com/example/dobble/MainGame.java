@@ -13,8 +13,8 @@ public class MainGame extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 1200, 780);
         stage.setScene(scene);
         stage.show();
-        Connect cn = new Connect();
-        cn.connect();
-        cn.sendToServer("Hello");
+        //Connect cn = new Connect();
+        //cn.connect();
+        //cn.sendToServer("Hello");
     }
 }
