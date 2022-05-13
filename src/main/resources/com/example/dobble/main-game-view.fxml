@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Point3D?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
@@ -82,7 +83,8 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="card2" layoutX="212.0" layoutY="204.0" prefHeight="276.0" prefWidth="274.0">
+      <Button fx:id="methodCall" layoutX="75.0" layoutY="595.0" mnemonicParsing="false" onMouseClicked="#calledMethod" prefHeight="112.0" prefWidth="246.0" text="Click" />
+      <AnchorPane fx:id="card5" layoutX="772.0" layoutY="209.0" prefHeight="276.0" prefWidth="274.0">
          <children>
             <Circle fill="WHITE" layoutX="137.0" layoutY="138.0" radius="136.0" stroke="#864c00" strokeType="OUTSIDE">
                <effect>
@@ -92,35 +94,38 @@
                      </color>
                   </DropShadow>
                </effect>
+               <rotationAxis>
+                  <Point3D />
+               </rotationAxis>
             </Circle>
-            <ImageView fx:id="card2I1" fitHeight="47.0" fitWidth="104.0" layoutX="32.0" layoutY="50.0" onMouseClicked="#clickCard2I1" pickOnBounds="true" preserveRatio="true" rotate="-40.6">
+            <ImageView fx:id="card5I1" fitHeight="62.0" fitWidth="54.0" layoutX="54.0" layoutY="58.0" onMouseClicked="#clickCard5I1" pickOnBounds="true" preserveRatio="true" rotate="63.4">
                <image>
-                  <Image url="@ikony/Dante/Dante.png" />
+                  <Image url="@ikony/Wydziały/BAIŚ.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="card2I2" accessibleText="kebab" fitHeight="62.0" fitWidth="70.0" layoutX="174.0" layoutY="44.0" onMouseClicked="#clickCard2I2" pickOnBounds="true" preserveRatio="true" rotate="103.1">
+            <ImageView fx:id="card5I2" accessibleText="kebab" fitHeight="38.0" fitWidth="46.0" layoutX="190.0" layoutY="160.0" onMouseClicked="#clickCard5I2" pickOnBounds="true" preserveRatio="true" rotate="32.2">
                <image>
                   <Image url="@ikony/Wydziały/WOIZ.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="card2I3" fitHeight="62.0" fitWidth="47.0" layoutX="40.0" layoutY="146.0" onMouseClicked="#clickCard2I3" pickOnBounds="true" preserveRatio="true" rotate="59.7">
+            <ImageView fx:id="card5I3" fitHeight="62.0" fitWidth="75.0" layoutX="98.0" layoutY="173.0" onMouseClicked="#clickCard5I6" pickOnBounds="true" preserveRatio="true" rotate="22.8">
                <image>
-                  <Image url="@ikony/Środki_transportu/car.png" />
+                  <Image url="@ikony/Wydziały/BINOŻ.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="card2I4" fitHeight="47.0" fitWidth="80.0" layoutX="169.0" layoutY="146.0" onMouseClicked="#clickCard2I4" pickOnBounds="true" preserveRatio="true" rotate="-53.1">
+            <ImageView fx:id="card5I4" fitHeight="46.0" fitWidth="55.0" layoutX="41.0" layoutY="140.0" onMouseClicked="#clickCard5I4" pickOnBounds="true" preserveRatio="true" rotate="43.8">
                <image>
-                  <Image url="@ikony/Wydziały/WTMiWT.png" />
+                  <Image url="@ikony/Student_na_zajęciach/settings.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="Card2I5" fitHeight="62.0" fitWidth="54.0" layoutX="94.0" layoutY="186.0" onMouseClicked="#clickCard2I5" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="card5I5" fitHeight="55.0" fitWidth="38.0" layoutX="126.0" layoutY="28.0" onMouseClicked="#clickCard5I5" pickOnBounds="true" preserveRatio="true" rotate="39.2">
                <image>
-                  <Image url="@ikony/Dante/Accept.png" />
+                  <Image url="@ikony/Wydziały/MECH.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="card2I6" fitHeight="55.0" fitWidth="47.0" layoutX="113.0" layoutY="96.0" onMouseClicked="#clickCard2I6" pickOnBounds="true" preserveRatio="true" rotate="-41.6">
+            <ImageView fx:id="card5I6" fitHeight="62.0" fitWidth="63.0" layoutX="135.0" layoutY="82.0" onMouseClicked="#clickCard5I6" pickOnBounds="true" preserveRatio="true" rotate="167.5">
                <image>
-                  <Image url="@ikony/Dante/Deny.png" />
+                  <Image url="@ikony/Środki_transportu/train.png" />
                </image>
             </ImageView>
          </children>
