@@ -5,19 +5,23 @@ import javafx.event.ActionEvent;
 import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Scanner;
+
+import java.net.*;
+import java.io.*;
 
 public class Connect {
     Socket socketIn;
-    private ObjectInputStream inputStream;
-    private PrintWriter outputStream;
+    private DataInputStream inputStream;
+    private DataOutputStream outputStream;
 
     void connect(){
         try {
             System.out.println("łączenie");
             socketIn = new Socket("localhost", 7); // do odczytu
             System.out.println("2");
-            outputStream = new PrintWriter(socketIn.getOutputStream());
-            inputStream = new ObjectInputStream(socketIn.getInputStream());
+            outputStream = new DataOutputStream(socketIn.getOutputStream());
+            inputStream = new DataInputStream(socketIn.getInputStream());
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -26,7 +30,7 @@ public class Connect {
         System.out.println("sendtoserver");
         if (outputStream != null) {
             try {
-                outputStream.print(string);
+                outputStream.writeUTF(string);
                 System.out.println("wyslano");
             } catch (Exception e) {
                 e.printStackTrace();
