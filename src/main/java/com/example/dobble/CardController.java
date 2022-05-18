@@ -63,7 +63,7 @@ public class CardController {
     private int currentSizeStack = 0;
     ArrayList<ArrayList<String>> cardLayout = new ArrayList<>();
     //String path = "file:/Users/weronikakus/Desktop/Dobble1/target/classes/com/example/dobble/ikony/";
-    String path = "C:\\Users\\ala_s\\IdeaProjects\\Dobble_kol\\src\\main\\resources\\com\\example\\dobble\\ikony";
+    String path = "file:/C:/Users/ala_s/IdeaProjects/Dobble_kol/target/classes/com/example/dobble/ikony/";
     String fileName = "Cards.txt";
 
     @FXML
