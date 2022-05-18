@@ -58,15 +58,27 @@ public class CardController {
     private Button methodCall;
 
     Card playerCard = new Card();
+    boolean taken = false;
     Card stackCard =  new Card();
+
     private final int NUMBERS_OF_CARDS = 6;
     private int currentSizeStack = 0;
     ArrayList<ArrayList<String>> cardLayout = new ArrayList<>();
-    String path = "file:/Users/weronikakus/Desktop/Dobble1/target/classes/com/example/dobble/ikony/";
+
+    String path = "";
     String fileName = "Cards.txt";
+
+    Connect client = new Connect();
 
     @FXML
     void calledMethod(MouseEvent event) {
+        String [] split = card5I1.getImage().getUrl().split("/");
+        for(int i = 0; i < split.length - 2; i++){
+            path += split[i] + "/";
+        }
+        System.out.println(path);
+
+        client.connect();
         initialize();
         loadCardFromFile();
         drawStartCards();
@@ -75,9 +87,11 @@ public class CardController {
     void initialize(){
         playerCard.setCardNumber(card5);
         playerCard.addIcon(card5I1, card5I2, card5I3, card5I4, card5I5, card5I6);
+
         stackCard.setCardNumber(card1);
         stackCard.addIcon(card1I1, card1I2, card1I3, card1I4, card1I5, card1I6);
     }
+
     void loadCardFromFile(){
         try {
             BufferedReader fp = new BufferedReader(new FileReader(fileName));
@@ -101,6 +115,7 @@ public class CardController {
     void checkEquality(ImageView imageView){
         for (int i = 0; i < 6; i++) {
             if(imageView.getImage().getUrl().equals(playerCard.iconList.get(i).getImage().getUrl())){
+                client.sendToServer("TAKEN");
                 for(int j = 0; j < 6; j++){
                     Image img = new Image(stackCard.iconList.get(j).getImage().getUrl());
                     playerCard.iconList.get(j).setImage(img);
@@ -134,32 +149,32 @@ public class CardController {
 
     @FXML
     void clickC1I1(MouseEvent event) {
-       checkEquality(card1I1);
+       if(!taken) checkEquality(card1I1);
     }
 
     @FXML
     void clickCard1I2(MouseEvent event) {
-       checkEquality(card1I2);
+       if(!taken) checkEquality(card1I2);
     }
 
     @FXML
     void clickCard1I3(MouseEvent event) {
-        checkEquality(card1I3);
+        if(!taken) checkEquality(card1I3);
     }
 
     @FXML
     void clickCard1I4(MouseEvent event) {
-        checkEquality(card1I4);
+        if(!taken) checkEquality(card1I4);
     }
 
     @FXML
     void clickCard1I5(MouseEvent event) {
-        checkEquality(card1I5);
+        if(!taken) checkEquality(card1I5);
     }
 
     @FXML
     void clickCard1I6(MouseEvent event) {
-        checkEquality(card1I6);
+        if(!taken) checkEquality(card1I6);
     }
 
     @FXML

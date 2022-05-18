@@ -31,7 +31,7 @@ public class Connect {
         if (outputStream != null) {
             try {
                 outputStream.writeUTF(string);
-                System.out.println("wyslano");
+                System.out.println("Send to Server");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -39,5 +39,16 @@ public class Connect {
         else {
             System.out.println("null");
         }
+    }
+
+    void getFromServer(){
+        if(inputStream!=null){
+            try{
+                inputStream.readUTF();
+                System.out.println("Received from Server");
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }else System.out.println("null");
     }
 }
