@@ -27,7 +27,6 @@ public class Connect {
         }
     }
     void sendToServer(String string) {
-        System.out.println("sendtoserver");
         if (outputStream != null) {
             try {
                 outputStream.writeUTF(string);
@@ -41,14 +40,14 @@ public class Connect {
         }
     }
 
-    void getFromServer(){
-        if(inputStream!=null){
+    String getFromServer(){
+        String rec = null;
             try{
-                inputStream.readUTF();
+                rec = inputStream.readUTF();
                 System.out.println("Received from Server");
             }catch (Exception e){
                 e.printStackTrace();
             }
-        }else System.out.println("null");
+            return rec;
     }
 }

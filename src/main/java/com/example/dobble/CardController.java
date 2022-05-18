@@ -79,6 +79,12 @@ public class CardController {
         System.out.println(path);
 
         client.connect();
+
+        Thread getMessage = new Thread(() ->{
+            String mess = client.getFromServer();
+            if(mess.equals("TAKEN")) taken = true;
+        });
+        getMessage.start();
         initialize();
         loadCardFromFile();
         drawStartCards();
@@ -123,6 +129,7 @@ public class CardController {
                     Image img1 = new Image(cardLayout.get(currentSizeStack).get(j));
                     stackCard.iconList.get(j).setImage(img1);
                 }
+                taken = false;
                 currentSizeStack++;
                 break;
             }
