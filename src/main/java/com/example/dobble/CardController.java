@@ -59,10 +59,11 @@ public class CardController {
 
     Card playerCard = new Card();
     Card stackCard =  new Card();
-    private final int NUMBERS_OF_CARDS = 6;
+    private final int NUMBERS_OF_CARDS = 31;
     private int currentSizeStack = 0;
     ArrayList<ArrayList<String>> cardLayout = new ArrayList<>();
-    String path = "file:/Users/weronikakus/Desktop/Dobble1/target/classes/com/example/dobble/ikony/";
+    //String path = "file:/Users/weronikakus/Desktop/Dobble1/target/classes/com/example/dobble/ikony/";
+    String path = "file:/C:/Users/ala_s/IdeaProjects/Dobble_kol/target/classes/com/example/dobble/ikony/";
     String fileName = "Cards.txt";
 
     @FXML
