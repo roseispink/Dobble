@@ -27,11 +27,10 @@ public class Connect {
         }
     }
     void sendToServer(String string) {
-        System.out.println("sendtoserver");
         if (outputStream != null) {
             try {
                 outputStream.writeUTF(string);
-                System.out.println("wyslano");
+                System.out.println("Send to Server");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -39,5 +38,16 @@ public class Connect {
         else {
             System.out.println("null");
         }
+    }
+
+    String getFromServer(){
+        String rec = null;
+            try{
+                rec = inputStream.readUTF();
+                System.out.println("Received from Server");
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            return rec;
     }
 }

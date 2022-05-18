@@ -37,9 +37,10 @@ class ServerThread extends Thread{
         System.out.println("Polaczono sie na porcie " + sOut.getPort());
         while (true){
             try {
-                System.out.println("otworzono");
                 String read = inputStream.readUTF();
                 System.out.println(read);
+                outputStream.writeUTF(read);
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
