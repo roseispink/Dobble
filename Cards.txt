@@ -111,7 +111,7 @@ Wydziały/WIPOS.png
 Wydziały/MECH.png
 
 Student_na_przerwie/money.png
-Studnet_na_przerwie/kebab.png
+Student_na_przerwie/kebab.png
 Wydziały/WEEIA.png
 Aplikacje_studenckie/discord.png
 Wydziały/WOIZ.png
