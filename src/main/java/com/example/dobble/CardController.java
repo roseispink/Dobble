@@ -61,11 +61,10 @@ public class CardController {
     boolean taken = false;
     Card stackCard =  new Card();
 
-    private final int NUMBERS_OF_CARDS = 6;
+    String path = "";
+    private final int NUMBERS_OF_CARDS = 31;
     private int currentSizeStack = 0;
     ArrayList<ArrayList<String>> cardLayout = new ArrayList<>();
-
-    String path = "";
     String fileName = "Cards.txt";
 
     Connect client = new Connect();
