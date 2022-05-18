@@ -149,10 +149,10 @@ Student_na_przerwie/cigarettes.png
 Aplikacje_studenckie/WIKAMP.png
 Prowadzący/wąsy.png
 Wydziały/BAIŚ.png
-Aplikacje_studenckie/noodles.png
+Student_na_przerwie/noodles.png
 Dante/Accept.png
 
-Aplikacje_studenckie/money.png
+Student_na_przerwie/money.png
 Student_na_zajęciach/settings.png
 Student_na_przerwie/harnas.png
 Środki_transportu/car.png
