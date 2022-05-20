@@ -1,2 +1,3 @@
 # Dobble
-Networking Dobble game
+(project in building)
+Networking Dobble game in JavaFx
