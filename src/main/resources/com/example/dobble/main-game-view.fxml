@@ -83,7 +83,6 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <Button fx:id="methodCall" layoutX="75.0" layoutY="595.0" mnemonicParsing="false" onMouseClicked="#calledMethod" prefHeight="112.0" prefWidth="246.0" text="Click" />
       <AnchorPane fx:id="card5" layoutX="772.0" layoutY="209.0" prefHeight="276.0" prefWidth="274.0">
          <children>
             <Circle fill="WHITE" layoutX="137.0" layoutY="138.0" radius="136.0" stroke="#864c00" strokeType="OUTSIDE">

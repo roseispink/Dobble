@@ -19,7 +19,6 @@ public class Connect {
         try {
             System.out.println("łączenie");
             socketIn = new Socket("localhost", 7); // do odczytu
-            System.out.println("2");
             outputStream = new DataOutputStream(socketIn.getOutputStream());
             inputStream = new DataInputStream(socketIn.getInputStream());
         }catch (Exception e){

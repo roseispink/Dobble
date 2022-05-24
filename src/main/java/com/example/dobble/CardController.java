@@ -9,6 +9,8 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class CardController {
 
@@ -54,8 +56,6 @@ public class CardController {
     @FXML
     private ImageView card5I6;
 
-    @FXML
-    private Button methodCall;
 
     Card playerCard = new Card();
     boolean taken = false;
@@ -68,28 +68,63 @@ public class CardController {
     String fileName = "Cards.txt";
 
     Connect client = new Connect();
+    private boolean mainPlayer = true;
 
-    @FXML
-    void calledMethod(MouseEvent event) {
+
+
+    public void checkDraw(){
+        if(mainPlayer) drawStartCards();
+    }
+
+    public void getPath(){
         String [] split = card5I1.getImage().getUrl().split("/");
         for(int i = 0; i < split.length - 2; i++){
             path += split[i] + "/";
         }
         System.out.println(path);
-
-        client.connect();
-
-        Thread getMessage = new Thread(() ->{
-            String mess = client.getFromServer();
-            if(mess.equals("TAKEN")) taken = true;
-        });
-        getMessage.start();
-        initialize();
-        loadCardFromFile();
-        drawStartCards();
     }
 
-    void initialize(){
+    public void connect(){
+        client.connect();
+        Timer timer =  new Timer();
+        TimerTask getMess = new TimerTask() {
+            @Override
+            public void run() {
+                String mess = client.getFromServer();
+                if(mess.equals("1")) {
+                    System.out.println("Main");
+                    mainPlayer = true;
+                }
+                else if(mess.equals("2")) {
+                    System.out.println("Not main");
+                    mainPlayer = false;
+                }
+                if(mess.equals("TAKEN")) taken = true;
+                if(mess.startsWith("STACKCARD") && !mainPlayer){
+                    System.out.println("jeden tylko");
+                    int playerCardNum = (int) ((Math.random() * (NUMBERS_OF_CARDS-1)) + 0);
+                    String [] tab = mess.split(" ");
+                    int mainCard = Integer.getInteger(tab[0]);
+                    while (mainCard == playerCardNum) playerCardNum = (int) ((Math.random() * (NUMBERS_OF_CARDS - 1)) + 0);
+                    for(int j = 0; j < 6; j++){
+                        Image img = new Image(cardLayout.get(playerCardNum).get(j));
+                        playerCard.iconList.get(j).setImage(img);
+
+                        Image img1 = new Image(cardLayout.get(mainCard).get(j));
+                        stackCard.iconList.get(j).setImage(img1);
+                    }
+                    cardLayout.remove(playerCardNum);
+                    if(playerCardNum< mainCard) mainCard--;
+                    cardLayout.remove(mainCard);
+                    mainPlayer = false;
+                }
+            }
+        };
+        timer.schedule(getMess, 300, 1000);
+    }
+
+
+    public void initialize(){
         playerCard.setCardNumber(card5);
         playerCard.addIcon(card5I1, card5I2, card5I3, card5I4, card5I5, card5I6);
 
@@ -97,7 +132,7 @@ public class CardController {
         stackCard.addIcon(card1I1, card1I2, card1I3, card1I4, card1I5, card1I6);
     }
 
-    void loadCardFromFile(){
+    public void loadCardFromFile(){
         try {
             BufferedReader fp = new BufferedReader(new FileReader(fileName));
             short j = 0;
@@ -117,7 +152,7 @@ public class CardController {
         }
     }
 
-    void checkEquality(ImageView imageView){
+    public void checkEquality(ImageView imageView){
         for (int i = 0; i < 6; i++) {
             if(imageView.getImage().getUrl().equals(playerCard.iconList.get(i).getImage().getUrl())){
                 client.sendToServer("TAKEN");
@@ -135,22 +170,25 @@ public class CardController {
         }
     }
 
-    void drawStartCards(){
-        int playerCardNum = (int) ((Math.random() * (NUMBERS_OF_CARDS-1)) + 0);
-        System.out.println(playerCardNum);
-        int mainCard = (int) ((Math.random() * (NUMBERS_OF_CARDS-1 )) + 0);
-        while (mainCard == playerCardNum) mainCard = (int) ((Math.random() * (NUMBERS_OF_CARDS - 1)) + 0);
-        System.out.println(mainCard);
-        for(int j = 0; j < 6; j++){
-            Image img = new Image(cardLayout.get(playerCardNum).get(j));
-            playerCard.iconList.get(j).setImage(img);
+    public void drawStartCards(){
+        if(mainPlayer) {
+            int playerCardNum = (int) ((Math.random() * (NUMBERS_OF_CARDS - 1)) + 0);
+            System.out.println(playerCardNum);
+            int mainCard = (int) ((Math.random() * (NUMBERS_OF_CARDS - 1)) + 0);
+            while (mainCard == playerCardNum) mainCard = (int) ((Math.random() * (NUMBERS_OF_CARDS - 1)) + 0);
+            client.sendToServer("STACKCARD " + mainCard);
+            System.out.println(mainCard);
+            for (int j = 0; j < 6; j++) {
+                Image img = new Image(cardLayout.get(playerCardNum).get(j));
+                playerCard.iconList.get(j).setImage(img);
 
-            Image img1 = new Image(cardLayout.get(mainCard).get(j));
-            stackCard.iconList.get(j).setImage(img1);
+                Image img1 = new Image(cardLayout.get(mainCard).get(j));
+                stackCard.iconList.get(j).setImage(img1);
+            }
+            cardLayout.remove(playerCardNum);
+            if (playerCardNum < mainCard) mainCard--;
+            cardLayout.remove(mainCard);
         }
-        cardLayout.remove(playerCardNum);
-        if(playerCardNum< mainCard) mainCard--;
-        cardLayout.remove(mainCard);
     }
 
     @FXML
@@ -183,29 +221,5 @@ public class CardController {
         if(!taken) checkEquality(card1I6);
     }
 
-    @FXML
-    void clickCard5I1(MouseEvent event) {
-
-    }
-
-    @FXML
-    void clickCard5I2(MouseEvent event) {
-
-    }
-
-    @FXML
-    void clickCard5I4(MouseEvent event) {
-
-    }
-
-    @FXML
-    void clickCard5I5(MouseEvent event) {
-
-    }
-
-    @FXML
-    void clickCard5I6(MouseEvent event) {
-
-    }
 
 }
