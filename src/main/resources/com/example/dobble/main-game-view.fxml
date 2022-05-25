@@ -37,8 +37,8 @@
       <Label layoutX="283.0" layoutY="176.0" text="Karta na stole" />
       <Label layoutX="850.0" layoutY="176.0" text="Twoja karta" />
       <Label layoutX="539.0" layoutY="539.0" text="Karta przeciwnika" />
-      <Label layoutX="459.0" layoutY="458.0" text="31" />
-      <Label layoutX="1033.0" layoutY="458.0" text="0" />
+      <Label fx:id="all" layoutX="459.0" layoutY="458.0" text="31" />
+      <Label fx:id="yours" layoutX="1033.0" layoutY="458.0" text="0" />
       <Label layoutX="713.0" layoutY="723.0" text="0" />
       <AnchorPane id="card1" fx:id="card1" accessibleText="card1" layoutX="212.0" layoutY="204.0" prefHeight="276.0" prefWidth="274.0">
          <children>
@@ -97,32 +97,32 @@
                   <Point3D />
                </rotationAxis>
             </Circle>
-            <ImageView fx:id="card5I1" fitHeight="62.0" fitWidth="54.0" layoutX="54.0" layoutY="58.0" onMouseClicked="#clickCard5I1" pickOnBounds="true" preserveRatio="true" rotate="63.4">
+            <ImageView fx:id="card5I1" fitHeight="62.0" fitWidth="54.0" layoutX="54.0" layoutY="58.0" onMouseClicked="#clickC1I1" pickOnBounds="true" preserveRatio="true" rotate="63.4">
                <image>
                   <Image url="@ikony/Wydziały/BAIŚ.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="card5I2" accessibleText="kebab" fitHeight="38.0" fitWidth="46.0" layoutX="190.0" layoutY="160.0" onMouseClicked="#clickCard5I2" pickOnBounds="true" preserveRatio="true" rotate="32.2">
+            <ImageView fx:id="card5I2" accessibleText="kebab" fitHeight="38.0" fitWidth="46.0" layoutX="190.0" layoutY="160.0" onMouseClicked="#clickCard1I2" pickOnBounds="true" preserveRatio="true" rotate="32.2">
                <image>
                   <Image url="@ikony/Wydziały/WOIZ.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="card5I3" fitHeight="62.0" fitWidth="75.0" layoutX="98.0" layoutY="173.0" onMouseClicked="#clickCard5I6" pickOnBounds="true" preserveRatio="true" rotate="22.8">
+            <ImageView fx:id="card5I3" fitHeight="62.0" fitWidth="75.0" layoutX="98.0" layoutY="173.0" onMouseClicked="#clickCard1I3" pickOnBounds="true" preserveRatio="true" rotate="22.8">
                <image>
                   <Image url="@ikony/Wydziały/BINOŻ.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="card5I4" fitHeight="46.0" fitWidth="55.0" layoutX="41.0" layoutY="140.0" onMouseClicked="#clickCard5I4" pickOnBounds="true" preserveRatio="true" rotate="43.8">
+            <ImageView fx:id="card5I4" fitHeight="46.0" fitWidth="55.0" layoutX="41.0" layoutY="140.0" onMouseClicked="#clickCard1I4" pickOnBounds="true" preserveRatio="true" rotate="43.8">
                <image>
                   <Image url="@ikony/Student_na_zajęciach/settings.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="card5I5" fitHeight="55.0" fitWidth="38.0" layoutX="126.0" layoutY="28.0" onMouseClicked="#clickCard5I5" pickOnBounds="true" preserveRatio="true" rotate="39.2">
+            <ImageView fx:id="card5I5" fitHeight="55.0" fitWidth="38.0" layoutX="126.0" layoutY="28.0" onMouseClicked="#clickCard1I5" pickOnBounds="true" preserveRatio="true" rotate="39.2">
                <image>
                   <Image url="@ikony/Wydziały/MECH.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="card5I6" fitHeight="62.0" fitWidth="63.0" layoutX="135.0" layoutY="82.0" onMouseClicked="#clickCard5I6" pickOnBounds="true" preserveRatio="true" rotate="167.5">
+            <ImageView fx:id="card5I6" fitHeight="62.0" fitWidth="63.0" layoutX="135.0" layoutY="82.0" onMouseClicked="#clickCard1I6" pickOnBounds="true" preserveRatio="true" rotate="167.5">
                <image>
                   <Image url="@ikony/Środki_transportu/train.png" />
                </image>

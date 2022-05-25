@@ -2,10 +2,12 @@ package com.example.dobble;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -56,13 +58,18 @@ public class CardController {
     @FXML
     private ImageView card5I6;
 
+    @FXML
+    private Label all;
+
+    @FXML
+    private Label yours;
 
     Card playerCard = new Card();
     boolean taken = false;
     Card stackCard =  new Card();
 
     String path = "";
-    private final int NUMBERS_OF_CARDS = 31;
+    private int NUMBERS_OF_CARDS = 31;
     private int currentSizeStack = 0;
     ArrayList<ArrayList<String>> cardLayout = new ArrayList<>();
     String fileName = "Cards.txt";
@@ -130,6 +137,9 @@ public class CardController {
 
         stackCard.setCardNumber(card1);
         stackCard.addIcon(card1I1, card1I2, card1I3, card1I4, card1I5, card1I6);
+
+        all.setText(String.valueOf(NUMBERS_OF_CARDS-2));
+        yours.setText(String.valueOf(currentSizeStack));
     }
 
     public void loadCardFromFile(){
@@ -165,6 +175,10 @@ public class CardController {
                 }
                 taken = false;
                 currentSizeStack++;
+                NUMBERS_OF_CARDS--;
+                all.setText(String.valueOf(NUMBERS_OF_CARDS-2));
+                yours.setText(String.valueOf(currentSizeStack));
+                yours.setTextFill(Color.AQUAMARINE);
                 break;
             }
         }
