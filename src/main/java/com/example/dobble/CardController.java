@@ -69,7 +69,7 @@ public class CardController {
     Card stackCard =  new Card();
 
     String path = "";
-    private int NUMBERS_OF_CARDS = 31;
+    private final int NUMBERS_OF_CARDS = 31;
     private int currentSizeStack = 0;
     ArrayList<ArrayList<String>> cardLayout = new ArrayList<>();
     String fileName = "Cards.txt";
@@ -79,55 +79,69 @@ public class CardController {
 
 
 
-    public void checkDraw(){
-        if(mainPlayer) drawStartCards();
-    }
+    public int getNUMBERS_OF_CARDS(){ return NUMBERS_OF_CARDS;}
 
     public void getPath(){
         String [] split = card5I1.getImage().getUrl().split("/");
         for(int i = 0; i < split.length - 2; i++){
             path += split[i] + "/";
         }
-        System.out.println(path);
     }
 
     public void connect(){
         client.connect();
-        Timer timer =  new Timer();
-        TimerTask getMess = new TimerTask() {
-            @Override
-            public void run() {
-                String mess = client.getFromServer();
-                if(mess.equals("1")) {
-                    System.out.println("Main");
-                    mainPlayer = true;
-                }
-                else if(mess.equals("2")) {
-                    System.out.println("Not main");
-                    mainPlayer = false;
-                }
-                if(mess.equals("TAKEN")) taken = true;
-                if(mess.startsWith("STACKCARD") && !mainPlayer){
-                    System.out.println("jeden tylko");
-                    int playerCardNum = (int) ((Math.random() * (NUMBERS_OF_CARDS-1)) + 0);
-                    String [] tab = mess.split(" ");
-                    int mainCard = Integer.getInteger(tab[0]);
-                    while (mainCard == playerCardNum) playerCardNum = (int) ((Math.random() * (NUMBERS_OF_CARDS - 1)) + 0);
-                    for(int j = 0; j < 6; j++){
-                        Image img = new Image(cardLayout.get(playerCardNum).get(j));
-                        playerCard.iconList.get(j).setImage(img);
 
-                        Image img1 = new Image(cardLayout.get(mainCard).get(j));
+        new Thread(() -> {
+            while (true){
+                String mess = client.getFromServer();
+                if(mess.equals("END")) break;
+                if(mess.equals("1"))  mainPlayer = true;
+                else if(mess.equals("2")) mainPlayer = false;
+                if(mess.equals("TAKEN")) {
+                    taken = true;
+                    for(int j = 0; j < 6; j++){
+                        Image img1 = new Image(cardLayout.get(currentSizeStack).get(j));
                         stackCard.iconList.get(j).setImage(img1);
                     }
-                    cardLayout.remove(playerCardNum);
-                    if(playerCardNum< mainCard) mainCard--;
+                    currentSizeStack++;
+                    all.setText(String.valueOf(NUMBERS_OF_CARDS-3-currentSizeStack));
+                    taken = false;
+                }
+                if(mess.startsWith("START")){
+                    String [] tab = mess.split(" ");
+                    int mainCard = Integer.parseInt(tab[1]);
+                    int mainPlayerCard, opponentCard;
+                    if(mainPlayer) {
+                        mainPlayerCard = Integer.parseInt(tab[2]);
+                        opponentCard = Integer.parseInt(tab[3]);
+                    }
+                    else {
+                        mainPlayerCard = Integer.parseInt(tab[3]);
+                        opponentCard = Integer.parseInt(tab[2]);
+                    }
+                    System.out.println(cardLayout.size());
+                    System.out.println(cardLayout.get(mainCard
+                    ));
+                    System.out.println(cardLayout.get(mainPlayerCard
+                    ));
+                    for(int j = 0; j < 6; j++){
+                        Image img1 = new Image(cardLayout.get(mainCard).get(j));
+                        stackCard.iconList.get(j).setImage(img1);
+
+                        Image img = new Image(cardLayout.get(mainPlayerCard).get(j));
+                        playerCard.iconList.get(j).setImage(img);
+                    }
                     cardLayout.remove(mainCard);
-                    mainPlayer = false;
+                    if(mainPlayerCard < opponentCard) opponentCard--;
+                    if(mainCard< mainPlayerCard) mainPlayerCard--;
+                    cardLayout.remove(mainPlayerCard);
+                    if(mainCard < opponentCard) opponentCard--;
+                    cardLayout.remove(opponentCard);
+
+                    System.out.println("cardLayout = " + cardLayout.size());
                 }
             }
-        };
-        timer.schedule(getMess, 300, 1000);
+        }).start();
     }
 
 
@@ -138,7 +152,7 @@ public class CardController {
         stackCard.setCardNumber(card1);
         stackCard.addIcon(card1I1, card1I2, card1I3, card1I4, card1I5, card1I6);
 
-        all.setText(String.valueOf(NUMBERS_OF_CARDS-2));
+        all.setText(String.valueOf(NUMBERS_OF_CARDS-3));
         yours.setText(String.valueOf(currentSizeStack));
     }
 
@@ -175,8 +189,7 @@ public class CardController {
                 }
                 taken = false;
                 currentSizeStack++;
-                NUMBERS_OF_CARDS--;
-                all.setText(String.valueOf(NUMBERS_OF_CARDS-2));
+                all.setText(String.valueOf(NUMBERS_OF_CARDS-3-currentSizeStack));
                 yours.setText(String.valueOf(currentSizeStack));
                 yours.setTextFill(Color.AQUAMARINE);
                 break;
@@ -184,7 +197,7 @@ public class CardController {
         }
     }
 
-    public void drawStartCards(){
+    /*public void drawStartCards(){
         if(mainPlayer) {
             int playerCardNum = (int) ((Math.random() * (NUMBERS_OF_CARDS - 1)) + 0);
             System.out.println(playerCardNum);
@@ -203,7 +216,7 @@ public class CardController {
             if (playerCardNum < mainCard) mainCard--;
             cardLayout.remove(mainCard);
         }
-    }
+    }*/
 
     @FXML
     void clickC1I1(MouseEvent event) {

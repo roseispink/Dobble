@@ -32,11 +32,11 @@ import java.net.Socket;
                 Scene scene = new Scene(fxmlLoader.load(), 1200, 780);
                 stage.setScene(scene);
                 stage.show();
-                ((CardController)fxmlLoader.getController()).connect();
                 ((CardController)fxmlLoader.getController()).getPath();
                 ((CardController)fxmlLoader.getController()).initialize();
                 ((CardController)fxmlLoader.getController()).loadCardFromFile();
-                ((CardController)fxmlLoader.getController()).drawStartCards();
+                ((CardController)fxmlLoader.getController()).connect();
+                //((CardController)fxmlLoader.getController()).drawStartCards();
 
             } catch (Exception e) {
                 e.printStackTrace();
