@@ -20,13 +20,11 @@ import java.net.Socket;
 
     public class HelloController {
 
-        @FXML
-        private Button mainGameB;
         Stage stage = new Stage();
 
 
         @FXML
-        void startMainGame(MouseEvent event) {
+        void startMainGame() {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(HelloController.class.getResource("main-game-view.fxml"));
                 Scene scene = new Scene(fxmlLoader.load(), 1200, 780);
@@ -36,7 +34,7 @@ import java.net.Socket;
                 ((CardController)fxmlLoader.getController()).initialize();
                 ((CardController)fxmlLoader.getController()).loadCardFromFile();
                 ((CardController)fxmlLoader.getController()).connect();
-                //((CardController)fxmlLoader.getController()).drawStartCards();
+
 
             } catch (Exception e) {
                 e.printStackTrace();

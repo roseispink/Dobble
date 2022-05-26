@@ -13,36 +13,20 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1200.0" styleClass="stage" stylesheets="@mainGame.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.dobble.CardController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#616cbc" height="330.0" layoutX="184.0" layoutY="169.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="330.0" />
+      <Rectangle fx:id="stackRec" arcHeight="5.0" arcWidth="5.0" fill="#616cbc" height="415.0" layoutX="120.0" layoutY="234.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="415.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#616cbc" height="112.0" layoutX="-4.0" opacity="0.84" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1210.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#616cbc" height="330.0" layoutX="744.0" layoutY="169.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="330.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#616cbc" height="230.0" layoutX="514.0" layoutY="530.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="230.0" />
+      <Rectangle fx:id="playerRec" arcHeight="5.0" arcWidth="5.0" fill="#616cbc" height="415.0" layoutX="694.0" layoutY="234.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="415.0" />
       <Label layoutX="459.0" layoutY="25.0" styleClass="label1" text="Gra Główna" />
       <ImageView accessibleText="logo" fitHeight="94.0" fitWidth="136.0" layoutX="76.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@maskotka-tyl-2.png" />
          </image>
       </ImageView>
-      <Button layoutX="860.0" layoutY="25.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="104.0" text="Menu" textAlignment="CENTER" />
-      <Button layoutX="860.0" layoutY="62.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="104.0" stylesheets="@mainGame.css" text="Wyjdź" textAlignment="CENTER" />
-      <Circle fill="WHITE" layoutX="634.0" layoutY="658.0" radius="85.0" stroke="#864c00" strokeType="OUTSIDE">
-         <effect>
-            <DropShadow blurType="ONE_PASS_BOX" height="0.0" offsetX="10.0" offsetY="4.0" radius="9.08" width="38.32">
-               <color>
-                  <Color opacity="0.14149139821529388" />
-               </color>
-            </DropShadow>
-         </effect>
-      </Circle>
-      <Label layoutX="283.0" layoutY="176.0" text="Karta na stole" />
-      <Label layoutX="850.0" layoutY="176.0" text="Twoja karta" />
-      <Label layoutX="539.0" layoutY="539.0" text="Karta przeciwnika" />
-      <Label fx:id="all" layoutX="459.0" layoutY="458.0" text="31" />
-      <Label fx:id="yours" layoutX="1033.0" layoutY="458.0" text="0" />
-      <Label layoutX="713.0" layoutY="723.0" text="0" />
-      <AnchorPane id="card1" fx:id="card1" accessibleText="card1" layoutX="212.0" layoutY="204.0" prefHeight="276.0" prefWidth="274.0">
+      <Button fx:id="toMenu" layoutX="860.0" layoutY="25.0" mnemonicParsing="false" onAction="#returnToMenu" prefHeight="26.0" prefWidth="104.0" text="Menu" textAlignment="CENTER" />
+      <Button fx:id="exit" layoutX="860.0" layoutY="62.0" mnemonicParsing="false" onAction="#exitAll" prefHeight="26.0" prefWidth="104.0" stylesheets="@mainGame.css" text="Wyjdź" textAlignment="CENTER" />
+      <AnchorPane id="card1" fx:id="card1" accessibleText="card1" layoutX="118.0" layoutY="234.0" prefHeight="415.0" prefWidth="415.0">
          <children>
-            <Circle fill="WHITE" layoutX="137.0" layoutY="138.0" radius="136.0" stroke="#864c00" strokeType="OUTSIDE">
+            <Circle fill="WHITE" layoutX="208.0" layoutY="219.0" radius="185.0" stroke="#864c00" strokeType="OUTSIDE">
                <effect>
                   <DropShadow blurType="ONE_PASS_BOX" height="0.0" offsetX="10.0" offsetY="4.0" radius="9.08" width="38.32">
                      <color>
@@ -51,41 +35,43 @@
                   </DropShadow>
                </effect>
             </Circle>
-            <ImageView fx:id="card1I1" fitHeight="62.0" fitWidth="92.0" layoutX="43.0" layoutY="33.0" onMouseClicked="#clickC1I1" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="card1I1" fitHeight="81.0" fitWidth="84.0" layoutX="136.0" layoutY="64.0" onMouseClicked="#clickC1I1" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@ikony/Wydziały/WFTIMS.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="card1I2" accessibleText="kebab" fitHeight="62.0" fitWidth="70.0" layoutX="174.0" layoutY="44.0" onMouseClicked="#clickCard1I2" pickOnBounds="true" preserveRatio="true" rotate="118.4">
+            <ImageView fx:id="card1I2" accessibleText="kebab" fitHeight="94.0" fitWidth="91.0" layoutX="258.0" layoutY="99.0" onMouseClicked="#clickCard1I2" pickOnBounds="true" preserveRatio="true" rotate="118.4">
                <image>
                   <Image url="@ikony/Student_na_przerwie/kebab.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="card1I3" fitHeight="34.0" fitWidth="98.0" layoutX="32.0" layoutY="129.0" onMouseClicked="#clickCard1I3" pickOnBounds="true" preserveRatio="true" rotate="146.3">
+            <ImageView fx:id="card1I3" fitHeight="34.0" fitWidth="98.0" layoutX="62.0" layoutY="178.0" onMouseClicked="#clickCard1I3" pickOnBounds="true" preserveRatio="true" rotate="146.3">
                <image>
                   <Image url="@ikony/Dante/Dante.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="card1I4" fitHeight="41.0" fitWidth="38.0" layoutX="121.0" layoutY="76.0" onMouseClicked="#clickCard1I4" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="card1I4" fitHeight="54.0" fitWidth="65.0" layoutX="181.0" layoutY="192.0" onMouseClicked="#clickCard1I4" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@ikony/Student_na_zajęciach/documents.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="card1I5" fitHeight="84.0" fitWidth="86.0" layoutX="79.0" layoutY="158.0" onMouseClicked="#clickCard1I5" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="card1I5" fitHeight="84.0" fitWidth="86.0" layoutX="93.0" layoutY="248.0" onMouseClicked="#clickCard1I5" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@ikony/Wydziały/BINOŻ.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="card1I6" fitHeight="38.0" fitWidth="84.0" layoutX="176.0" layoutY="140.0" onMouseClicked="#clickCard1I6" pickOnBounds="true" preserveRatio="true" rotate="-41.6">
+            <ImageView fx:id="card1I6" fitHeight="46.0" fitWidth="125.0" layoutX="229.0" layoutY="267.0" onMouseClicked="#clickCard1I6" pickOnBounds="true" preserveRatio="true" rotate="-41.6">
                <image>
                   <Image url="@ikony/Aplikacje_studenckie/WIKAMP.png" />
                </image>
             </ImageView>
+            <Label fx:id="all" layoutX="375.0" layoutY="381.0" text="31" />
+            <Label layoutX="134.0" layoutY="5.0" text="Karta na stole" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="card5" layoutX="772.0" layoutY="209.0" prefHeight="276.0" prefWidth="274.0">
+      <AnchorPane fx:id="card5" layoutX="693.0" layoutY="234.0" prefHeight="415.0" prefWidth="415.0">
          <children>
-            <Circle fill="WHITE" layoutX="137.0" layoutY="138.0" radius="136.0" stroke="#864c00" strokeType="OUTSIDE">
+            <Circle fill="WHITE" layoutX="208.0" layoutY="218.0" radius="185.0" stroke="#864c00" strokeType="OUTSIDE">
                <effect>
                   <DropShadow blurType="ONE_PASS_BOX" height="0.0" offsetX="10.0" offsetY="4.0" radius="9.08" width="38.32">
                      <color>
@@ -97,36 +83,38 @@
                   <Point3D />
                </rotationAxis>
             </Circle>
-            <ImageView fx:id="card5I1" fitHeight="62.0" fitWidth="54.0" layoutX="54.0" layoutY="58.0" onMouseClicked="#clickC1I1" pickOnBounds="true" preserveRatio="true" rotate="63.4">
+            <ImageView fx:id="card5I1" fitHeight="74.0" fitWidth="82.0" layoutX="169.0" layoutY="146.0" onMouseClicked="#clickC1I1" pickOnBounds="true" preserveRatio="true" rotate="63.4">
                <image>
                   <Image url="@ikony/Wydziały/BAIŚ.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="card5I2" accessibleText="kebab" fitHeight="38.0" fitWidth="46.0" layoutX="190.0" layoutY="160.0" onMouseClicked="#clickCard1I2" pickOnBounds="true" preserveRatio="true" rotate="32.2">
+            <ImageView fx:id="card5I2" accessibleText="kebab" fitHeight="38.0" fitWidth="149.0" layoutX="291.0" layoutY="254.0" onMouseClicked="#clickCard1I2" pickOnBounds="true" preserveRatio="true" rotate="32.2">
                <image>
                   <Image url="@ikony/Wydziały/WOIZ.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="card5I3" fitHeight="62.0" fitWidth="75.0" layoutX="98.0" layoutY="173.0" onMouseClicked="#clickCard1I3" pickOnBounds="true" preserveRatio="true" rotate="22.8">
+            <ImageView fx:id="card5I3" fitHeight="84.0" fitWidth="84.0" layoutX="164.0" layoutY="282.0" onMouseClicked="#clickCard1I3" pickOnBounds="true" preserveRatio="true" rotate="22.8">
                <image>
                   <Image url="@ikony/Wydziały/BINOŻ.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="card5I4" fitHeight="46.0" fitWidth="55.0" layoutX="41.0" layoutY="140.0" onMouseClicked="#clickCard1I4" pickOnBounds="true" preserveRatio="true" rotate="43.8">
+            <ImageView fx:id="card5I4" fitHeight="72.0" fitWidth="72.0" layoutX="81.0" layoutY="215.0" onMouseClicked="#clickCard1I4" pickOnBounds="true" preserveRatio="true" rotate="43.8">
                <image>
                   <Image url="@ikony/Student_na_zajęciach/settings.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="card5I5" fitHeight="55.0" fitWidth="38.0" layoutX="126.0" layoutY="28.0" onMouseClicked="#clickCard1I5" pickOnBounds="true" preserveRatio="true" rotate="39.2">
+            <ImageView fx:id="card5I5" fitHeight="74.0" fitWidth="63.0" layoutX="120.0" layoutY="83.0" onMouseClicked="#clickCard1I5" pickOnBounds="true" preserveRatio="true" rotate="39.2">
                <image>
                   <Image url="@ikony/Wydziały/MECH.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="card5I6" fitHeight="62.0" fitWidth="63.0" layoutX="135.0" layoutY="82.0" onMouseClicked="#clickCard1I6" pickOnBounds="true" preserveRatio="true" rotate="167.5">
+            <ImageView fx:id="card5I6" fitHeight="62.0" fitWidth="63.0" layoutX="283.0" layoutY="132.0" onMouseClicked="#clickCard1I6" pickOnBounds="true" preserveRatio="true" rotate="167.5">
                <image>
                   <Image url="@ikony/Środki_transportu/train.png" />
                </image>
             </ImageView>
+            <Label layoutX="152.0" layoutY="5.0" text="Twoja karta" />
+            <Label fx:id="yours" layoutX="369.0" layoutY="374.0" text="0" />
          </children>
       </AnchorPane>
    </children>

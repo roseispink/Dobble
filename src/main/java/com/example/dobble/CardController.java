@@ -1,18 +1,21 @@
 package com.example.dobble;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
+
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 import java.io.*;
+import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
+
 
 public class CardController {
 
@@ -63,6 +66,14 @@ public class CardController {
 
     @FXML
     private Label yours;
+
+
+    @FXML
+    private Rectangle playerRec;
+
+    @FXML
+    private Rectangle stackRec;
+
 
     Card playerCard = new Card();
     boolean taken = false;
@@ -168,6 +179,7 @@ public class CardController {
                     cardLayout.get(j).add(line);
                 }
                 String space = fp.readLine();
+
                 j++;
             }
             fp.close();
@@ -179,7 +191,18 @@ public class CardController {
     public void checkEquality(ImageView imageView){
         for (int i = 0; i < 6; i++) {
             if(imageView.getImage().getUrl().equals(playerCard.iconList.get(i).getImage().getUrl())){
+                new Thread(()->{
+                    stackRec.setFill(Color.GREEN);
+                    try {
+                        Thread.sleep(Duration.ofSeconds(1).toMillis());
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    stackRec.setFill(Color.valueOf("#616cbc"));
+                }).start();
+
                 client.sendToServer("TAKEN");
+
                 for(int j = 0; j < 6; j++){
                     Image img = new Image(stackCard.iconList.get(j).getImage().getUrl());
                     playerCard.iconList.get(j).setImage(img);
@@ -191,61 +214,59 @@ public class CardController {
                 currentSizeStack++;
                 all.setText(String.valueOf(NUMBERS_OF_CARDS-3-currentSizeStack));
                 yours.setText(String.valueOf(currentSizeStack));
-                yours.setTextFill(Color.AQUAMARINE);
-                break;
+                return;
             }
         }
+        new Thread(()->{
+            stackRec.setFill(Color.RED);
+            try {
+                Thread.sleep(Duration.ofSeconds(1).toMillis());
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            stackRec.setFill(Color.valueOf("#616cbc"));
+        }).start();
     }
 
-    /*public void drawStartCards(){
-        if(mainPlayer) {
-            int playerCardNum = (int) ((Math.random() * (NUMBERS_OF_CARDS - 1)) + 0);
-            System.out.println(playerCardNum);
-            int mainCard = (int) ((Math.random() * (NUMBERS_OF_CARDS - 1)) + 0);
-            while (mainCard == playerCardNum) mainCard = (int) ((Math.random() * (NUMBERS_OF_CARDS - 1)) + 0);
-            client.sendToServer("STACKCARD " + mainCard);
-            System.out.println(mainCard);
-            for (int j = 0; j < 6; j++) {
-                Image img = new Image(cardLayout.get(playerCardNum).get(j));
-                playerCard.iconList.get(j).setImage(img);
-
-                Image img1 = new Image(cardLayout.get(mainCard).get(j));
-                stackCard.iconList.get(j).setImage(img1);
-            }
-            cardLayout.remove(playerCardNum);
-            if (playerCardNum < mainCard) mainCard--;
-            cardLayout.remove(mainCard);
-        }
-    }*/
 
     @FXML
-    void clickC1I1(MouseEvent event) {
+    void clickC1I1() {
        if(!taken) checkEquality(card1I1);
     }
 
     @FXML
-    void clickCard1I2(MouseEvent event) {
+    void clickCard1I2() {
        if(!taken) checkEquality(card1I2);
     }
 
     @FXML
-    void clickCard1I3(MouseEvent event) {
+    void clickCard1I3() {
         if(!taken) checkEquality(card1I3);
     }
 
     @FXML
-    void clickCard1I4(MouseEvent event) {
+    void clickCard1I4() {
         if(!taken) checkEquality(card1I4);
     }
 
     @FXML
-    void clickCard1I5(MouseEvent event) {
+    void clickCard1I5() {
         if(!taken) checkEquality(card1I5);
     }
 
     @FXML
-    void clickCard1I6(MouseEvent event) {
+    void clickCard1I6() {
         if(!taken) checkEquality(card1I6);
+    }
+
+    @FXML
+    void exitAll() {
+        System.exit(0);
+    }
+
+    @FXML
+    void returnToMenu(ActionEvent event) {
+
     }
 
 
