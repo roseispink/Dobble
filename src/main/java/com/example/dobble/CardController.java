@@ -82,6 +82,7 @@ public class CardController {
     String path = "";
     private final int NUMBERS_OF_CARDS = 31;
     private int currentSizeStack = 0;
+    private int points = 31;
     ArrayList<ArrayList<String>> cardLayout = new ArrayList<>();
     String fileName = "Cards.txt";
 
@@ -115,7 +116,7 @@ public class CardController {
                         stackCard.iconList.get(j).setImage(img1);
                     }
                     currentSizeStack++;
-                    all.setText(String.valueOf(NUMBERS_OF_CARDS-3-currentSizeStack));
+                    all.setText(String.valueOf(points-3-currentSizeStack));
                     taken = false;
                 }
                 if(mess.startsWith("START")){
@@ -163,7 +164,7 @@ public class CardController {
         stackCard.setCardNumber(card1);
         stackCard.addIcon(card1I1, card1I2, card1I3, card1I4, card1I5, card1I6);
 
-        all.setText(String.valueOf(NUMBERS_OF_CARDS-3));
+        all.setText(String.valueOf(points-3));
         yours.setText(String.valueOf(currentSizeStack));
     }
 
@@ -212,7 +213,7 @@ public class CardController {
                 }
                 taken = false;
                 currentSizeStack++;
-                all.setText(String.valueOf(NUMBERS_OF_CARDS-3-currentSizeStack));
+                all.setText(String.valueOf(points-3-currentSizeStack));
                 yours.setText(String.valueOf(currentSizeStack));
                 return;
             }
