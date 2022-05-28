@@ -11,13 +11,23 @@
 }
 
 .button{
-    -fx-background-color: rgb(97, 108, 188);
+    -fx-background-color:
+        linear-gradient(#616cbc, #4a5291),
+        radial-gradient(center 50% -40%, radius 200%, #616cbc 45%, #4a5291 50%);
+    -fx-background-radius: 6, 5;
+    -fx-background-insets: 0, 1;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
+    -fx-text-fill: #e6e6e8;
+    -fx-font-size: 11pt;
+    -fx-font-family: "Helvetica";
 }
 
 .label1{
     -fx-font-size: 40pt ;
     -fx-text-alignment: center ;
-    -fx-font-family: "Arial";
-    //-fx-font-style: border;
-    -fx-text-fill: white;
+    -fx-font-family: "Helvetica";
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
+    -fx-font-style: italic;
+    -fx-font-weight: bold;
+    -fx-text-fill: #dcdce3;
 }
