@@ -1,35 +1,54 @@
 package com.example.dobble;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
-import java.net.Socket;
 
 
-    public class HelloController {
+public class HelloController {
 
-        Stage stage = new Stage();
+    Stage stageI = new Stage();
+    Stage stageM = new Stage();
+    Stage stage = new Stage();
+    Scene sc = null;
+
+
+        public void start(){
+            try{
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+            sc = new Scene(fxmlLoader.load(), 870, 570);
+                stage.setScene(sc);
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        @FXML
+        void showInstruction() throws IOException{
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("instruction-view.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 600, 415);
+            stageI.setScene(scene);
+            stageI.show();
+        }
 
 
         @FXML
         void startMainGame() {
+            //Platform.exit();
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(HelloController.class.getResource("main-game-view.fxml"));
                 Scene scene = new Scene(fxmlLoader.load(), 1200, 780);
-                stage.setScene(scene);
-                stage.show();
+                stageM.setScene(scene);
+                stageM.show();
                 ((CardController)fxmlLoader.getController()).getPath();
                 ((CardController)fxmlLoader.getController()).initialize();
                 ((CardController)fxmlLoader.getController()).loadCardFromFile();
@@ -39,6 +58,7 @@ import java.net.Socket;
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
         }
     }
 
