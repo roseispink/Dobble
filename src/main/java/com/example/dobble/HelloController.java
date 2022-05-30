@@ -26,6 +26,9 @@ public class HelloController {
             sc = new Scene(fxmlLoader.load(), 870, 570);
                 stage.setScene(sc);
                 stage.show();
+                stage.setOnHidden(windowEvent -> {
+                    Platform.exit();
+                });
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -44,6 +47,7 @@ public class HelloController {
         @FXML
         void startMainGame() {
             //Platform.exit();
+            //stage.hide();
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(HelloController.class.getResource("main-game-view.fxml"));
                 Scene scene = new Scene(fxmlLoader.load(), 1200, 780);
