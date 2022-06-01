@@ -26,8 +26,8 @@
     -fx-font-size: 40pt ;
     -fx-text-alignment: center ;
     -fx-font-family: "Helvetica";
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 10, 5.0 , 0 , 1 );
     -fx-font-style: italic;
     -fx-font-weight: bold;
-    -fx-text-fill: #dcdce3;
+    -fx-text-fill:#f0c1be;
 }
