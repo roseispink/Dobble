@@ -10,6 +10,7 @@ import javafx.scene.image.ImageView;
 
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
 import java.io.*;
@@ -19,6 +20,8 @@ import java.util.ArrayList;
 
 public class CardController {
 
+    @FXML
+    private Circle circle1;
     @FXML
     private AnchorPane card1;
 
@@ -80,9 +83,9 @@ public class CardController {
     Card stackCard =  new Card();
 
     String path = "";
-    private final int NUMBERS_OF_CARDS = 31;
+    private final int NUMBERS_OF_CARDS = 5;
     private int currentSizeStack = 0;
-    private int points = 31;
+    private int points = NUMBERS_OF_CARDS-3;
     ArrayList<ArrayList<String>> cardLayout = new ArrayList<>();
     String fileName = "Cards.txt";
 
@@ -116,7 +119,7 @@ public class CardController {
                         stackCard.iconList.get(j).setImage(img1);
                     }
                     currentSizeStack++;
-                    all.setText(String.valueOf(points-3-currentSizeStack));
+                    all.setText(String.valueOf(points-2-currentSizeStack));
                     taken = false;
                 }
                 if(mess.startsWith("START")){
@@ -164,7 +167,7 @@ public class CardController {
         stackCard.setCardNumber(card1);
         stackCard.addIcon(card1I1, card1I2, card1I3, card1I4, card1I5, card1I6);
 
-        all.setText(String.valueOf(points-3));
+        all.setText(String.valueOf(points));
         yours.setText(String.valueOf(currentSizeStack));
     }
 
@@ -192,18 +195,24 @@ public class CardController {
     public void checkEquality(ImageView imageView){
         for (int i = 0; i < 6; i++) {
             if(imageView.getImage().getUrl().equals(playerCard.iconList.get(i).getImage().getUrl())){
-                new Thread(()->{
-                    stackRec.setFill(Color.GREEN);
-                    try {
-                        Thread.sleep(Duration.ofSeconds(1).toMillis());
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-                    stackRec.setFill(Color.valueOf("#616cbc"));
-                }).start();
-
+                showInfo(Color.GREEN);
                 client.sendToServer("TAKEN");
+                points--;
 
+                System.out.println(points);
+
+                if(points==0){
+                    System.out.println("koniec");
+                    circle1.setVisible(false);
+                    all.setText(String.valueOf(points));
+                    yours.setText(String.valueOf(++currentSizeStack));
+                    for(int j = 0; j < 6; j++){
+                        stackCard.iconList.get(j).setVisible(false);
+                        Image img = new Image(cardLayout.get(currentSizeStack-2).get(j));
+                        playerCard.iconList.get(j).setImage(img);
+                    }
+                    return;
+                }
                 for(int j = 0; j < 6; j++){
                     Image img = new Image(stackCard.iconList.get(j).getImage().getUrl());
                     playerCard.iconList.get(j).setImage(img);
@@ -211,15 +220,22 @@ public class CardController {
                     Image img1 = new Image(cardLayout.get(currentSizeStack).get(j));
                     stackCard.iconList.get(j).setImage(img1);
                 }
+
                 taken = false;
                 currentSizeStack++;
-                all.setText(String.valueOf(points-3-currentSizeStack));
+
+                all.setText(String.valueOf(points));
                 yours.setText(String.valueOf(currentSizeStack));
+
                 return;
             }
         }
+        showInfo(Color.RED);
+    }
+
+    private void showInfo(Color color){
         new Thread(()->{
-            stackRec.setFill(Color.RED);
+            stackRec.setFill(color);
             try {
                 Thread.sleep(Duration.ofSeconds(1).toMillis());
             } catch (InterruptedException e) {
@@ -267,7 +283,7 @@ public class CardController {
 
     @FXML
     void returnToMenu(ActionEvent event) {
-
+        new HelloController().start();
     }
 
 
