@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
@@ -22,6 +23,9 @@ public class HelloController {
     Stage stage = new Stage();
     Scene sc = null;
 
+    @FXML
+    private Button mainGameB;
+
 
         public void start(){
             try{
@@ -29,9 +33,6 @@ public class HelloController {
             sc = new Scene(fxmlLoader.load(), 870, 570);
                 stage.setScene(sc);
                 stage.show();
-                stage.setOnHidden(windowEvent -> {
-                    Platform.exit();
-                });
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -49,8 +50,8 @@ public class HelloController {
 
         @FXML
         void startMainGame() {
-            //Platform.exit();
-            //stage.hide();
+            Stage stage = (Stage) mainGameB.getScene().getWindow();
+            stage.close();
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(HelloController.class.getResource("main-game-view.fxml"));
                 Scene scene = new Scene(fxmlLoader.load(), 1200, 780);
