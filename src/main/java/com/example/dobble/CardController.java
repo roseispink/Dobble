@@ -114,12 +114,15 @@ public class CardController {
                 else if(mess.equals("2")) mainPlayer = false;
                 if(mess.equals("TAKEN")) {
                     taken = true;
+                    points--;
+                    endGame();
                     for(int j = 0; j < 6; j++){
                         Image img1 = new Image(cardLayout.get(currentSizeStack).get(j));
                         stackCard.iconList.get(j).setImage(img1);
                     }
                     currentSizeStack++;
-                    all.setText(String.valueOf(points-2-currentSizeStack));
+
+                    all.setText(String.valueOf(points));
                     taken = false;
                 }
                 if(mess.startsWith("START")){
@@ -201,16 +204,9 @@ public class CardController {
 
                 System.out.println(points);
 
+
                 if(points==0){
-                    System.out.println("koniec");
-                    circle1.setVisible(false);
-                    all.setText(String.valueOf(points));
-                    yours.setText(String.valueOf(++currentSizeStack));
-                    for(int j = 0; j < 6; j++){
-                        stackCard.iconList.get(j).setVisible(false);
-                        Image img = new Image(cardLayout.get(currentSizeStack-2).get(j));
-                        playerCard.iconList.get(j).setImage(img);
-                    }
+                    endGame();
                     return;
                 }
                 for(int j = 0; j < 6; j++){
@@ -243,6 +239,18 @@ public class CardController {
             }
             stackRec.setFill(Color.valueOf("#616cbc"));
         }).start();
+    }
+
+    private void endGame(){
+        System.out.println("koniec");
+        circle1.setVisible(false);
+        all.setText(String.valueOf(points));
+        yours.setText(String.valueOf(++currentSizeStack));
+        for(int j = 0; j < 6; j++){
+            stackCard.iconList.get(j).setVisible(false);
+            Image img = new Image(cardLayout.get(currentSizeStack-2).get(j));
+            playerCard.iconList.get(j).setImage(img);
+        }
     }
 
 
