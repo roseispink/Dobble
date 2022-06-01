@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="415.0" prefWidth="600.0" stylesheets="@helloView.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.dobble.InstructionController">
+<AnchorPane prefHeight="415.0" prefWidth="600.0" stylesheets="@instructionView.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.dobble.InstructionController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#616cbc" height="94.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="600.0" />
       <ImageView fitHeight="175.0" fitWidth="222.0" layoutX="326.0" layoutY="151.0" pickOnBounds="true" preserveRatio="true">
@@ -22,7 +22,7 @@
             <Font size="13.0" />
          </font>
       </TextArea>
-      <Label id=".labelmin" layoutX="125.0" layoutY="8.0" prefHeight="65.0" prefWidth="349.0" stylesheets="@helloView.css" text="Instrukcja gry" />
+      <Label id=".labelmin" layoutX="125.0" layoutY="8.0" prefHeight="65.0" prefWidth="349.0" text="Instrukcja gry" />
       <ImageView fitHeight="38.0" fitWidth="36.0" layoutX="354.0" layoutY="177.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@question-mark.png" />

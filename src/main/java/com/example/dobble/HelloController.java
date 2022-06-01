@@ -7,6 +7,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -64,6 +67,16 @@ public class HelloController {
                 e.printStackTrace();
             }
 
+        }
+        @FXML
+        void premiumAccess(){
+            System.out.println("Siema");
+            Dialog<String> dialog = new Dialog<>();
+            dialog.setTitle("Dostęp premium");
+            ButtonType type = new ButtonType("OK!", ButtonBar.ButtonData.OK_DONE);
+            dialog.setContentText("Ta gra jest dostępna jedynie w wersji premium");
+            dialog.getDialogPane().getButtonTypes().add(type);
+            dialog.showAndWait();
         }
     }
 
