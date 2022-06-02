@@ -1,10 +1,10 @@
 package com.example.dobble;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
 import java.io.*;
 import java.time.Duration;
@@ -19,12 +20,16 @@ import java.util.ArrayList;
 
 
 public class CardController {
-
+    @FXML
+    private Label textBar;
+    @FXML
+    private Rectangle bar;
+    @FXML
+    private Button toMenu;
     @FXML
     private Circle circle1;
     @FXML
     private AnchorPane card1;
-
     @FXML
     private ImageView card1I1;
 
@@ -83,7 +88,7 @@ public class CardController {
     Card stackCard =  new Card();
 
     String path = "";
-    private final int NUMBERS_OF_CARDS = 5;
+    private final int NUMBERS_OF_CARDS = 7;
     private int currentSizeStack = 0;
     private int points = NUMBERS_OF_CARDS-3;
     ArrayList<ArrayList<String>> cardLayout = new ArrayList<>();
@@ -110,20 +115,35 @@ public class CardController {
             while (true){
                 String mess = client.getFromServer();
                 if(mess.equals("END")) break;
-                if(mess.equals("1"))  mainPlayer = true;
-                else if(mess.equals("2")) mainPlayer = false;
-                if(mess.equals("TAKEN")) {
+                if(mess.equals("1")) mainPlayer = true;
+                else if(mess.equals("2")){
+                    mainPlayer = false;
+                    bar.setVisible(false);
+                    textBar.setVisible(false);
+                }
+                if(mess.equals("OPPONENT JOIN")){
+                    bar.setVisible(false);
+                    textBar.setVisible(false);
+                }
+                if(mess.startsWith("TAKEN")) {
+                    String [] tab = mess.split(" ");
+                    int p = Integer.parseInt(tab[1]);
                     taken = true;
                     points--;
-                    endGame();
-                    for(int j = 0; j < 6; j++){
-                        Image img1 = new Image(cardLayout.get(currentSizeStack).get(j));
-                        stackCard.iconList.get(j).setImage(img1);
-                    }
-                    currentSizeStack++;
+                    Platform.runLater(() -> all.setText(String.valueOf(p)));
 
-                    all.setText(String.valueOf(points));
-                    taken = false;
+                    if(points==0) {
+                        endGame();
+                        Platform.runLater(this::loss);
+                    }
+                    else {
+                        for (int j = 0; j < 6; j++) {
+                            Image img1 = new Image(cardLayout.get(currentSizeStack).get(j));
+                            stackCard.iconList.get(j).setImage(img1);
+                        }
+                        currentSizeStack++;
+                        taken = false;
+                    }
                 }
                 if(mess.startsWith("START")){
                     String [] tab = mess.split(" ");
@@ -137,11 +157,6 @@ public class CardController {
                         mainPlayerCard = Integer.parseInt(tab[3]);
                         opponentCard = Integer.parseInt(tab[2]);
                     }
-                    System.out.println(cardLayout.size());
-                    System.out.println(cardLayout.get(mainCard
-                    ));
-                    System.out.println(cardLayout.get(mainPlayerCard
-                    ));
                     for(int j = 0; j < 6; j++){
                         Image img1 = new Image(cardLayout.get(mainCard).get(j));
                         stackCard.iconList.get(j).setImage(img1);
@@ -156,7 +171,6 @@ public class CardController {
                     if(mainCard < opponentCard) opponentCard--;
                     cardLayout.remove(opponentCard);
 
-                    System.out.println("cardLayout = " + cardLayout.size());
                 }
             }
         }).start();
@@ -186,7 +200,6 @@ public class CardController {
                     cardLayout.get(j).add(line);
                 }
                 String space = fp.readLine();
-
                 j++;
             }
             fp.close();
@@ -199,14 +212,15 @@ public class CardController {
         for (int i = 0; i < 6; i++) {
             if(imageView.getImage().getUrl().equals(playerCard.iconList.get(i).getImage().getUrl())){
                 showInfo(Color.GREEN);
-                client.sendToServer("TAKEN");
+                client.sendToServer("TAKEN "+ (currentSizeStack + 1));
                 points--;
 
                 System.out.println(points);
 
-
                 if(points==0){
                     endGame();
+                    all.setText(String.valueOf(points));
+                    yours.setText(String.valueOf(++currentSizeStack));
                     return;
                 }
                 for(int j = 0; j < 6; j++){
@@ -244,13 +258,30 @@ public class CardController {
     private void endGame(){
         System.out.println("koniec");
         circle1.setVisible(false);
-        all.setText(String.valueOf(points));
-        yours.setText(String.valueOf(++currentSizeStack));
         for(int j = 0; j < 6; j++){
             stackCard.iconList.get(j).setVisible(false);
-            Image img = new Image(cardLayout.get(currentSizeStack-2).get(j));
+            Image img = new Image(cardLayout.get(currentSizeStack-1).get(j));
             playerCard.iconList.get(j).setImage(img);
         }
+    }
+
+    private void win(){
+        Dialog<String> dialog = new Dialog<>();
+        dialog.setTitle("Koniec gry");
+        ButtonType type = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+        dialog.setContentText("Gratulacje wygrałeś! Aby zagrać ponownie przejdź do Menu");
+        dialog.getDialogPane().getButtonTypes().add(type);
+        dialog.showAndWait();
+    }
+
+    private void loss(){
+        Dialog<String> dialog = new Dialog<>();
+        dialog.setTitle("Koniec gry");
+        ButtonType type = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+        dialog.setContentText("Tym razem ci nie poszło :c Aby zagarać ponownie przejdź do Menu");
+        dialog.getDialogPane().getButtonTypes().add(type);
+        dialog.showAndWait();
+
     }
 
 
@@ -291,6 +322,8 @@ public class CardController {
 
     @FXML
     void returnToMenu(ActionEvent event) {
+        Stage stage = (Stage) toMenu.getScene().getWindow();
+        stage.close();
         new HelloController().start();
     }
 

@@ -117,5 +117,15 @@
             <Label fx:id="yours" layoutX="369.0" layoutY="374.0" text="0" />
          </children>
       </AnchorPane>
+      <Rectangle fx:id="bar" arcHeight="40.0" arcWidth="40.0" fill="#f0c1be" height="76.0" layoutX="412.0" layoutY="387.0" stroke="#00000099" strokeLineCap="ROUND" strokeType="INSIDE" width="379.0">
+         <effect>
+            <DropShadow blurType="ONE_PASS_BOX" height="29.22" offsetX="5.0" offsetY="2.0" radius="8.5575" width="7.01">
+               <color>
+                  <Color opacity="0.39817625284194946" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Rectangle>
+      <Label fx:id="textBar" layoutX="446.0" layoutY="411.0" text="Poczekaj na innego gracza..." />
    </children>
 </AnchorPane>

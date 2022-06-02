@@ -52,4 +52,8 @@ public class Connect {
         }
         return msgFromGroupChat;
     }
+
+    public void disconnect(){
+
+    }
 }

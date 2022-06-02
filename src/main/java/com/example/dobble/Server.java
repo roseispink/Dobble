@@ -38,7 +38,6 @@ public class Server{
         int player1 = (int) ((Math.random() * (num - 1)) + 0);
         int player2 = (int) ((Math.random() * (num - 1)) + 0);
         while (player2 == player1) player2 = (int) ((Math.random() * (num - 1)) + 0);
-        System.out.println(player1 + "  " + player2);
         int mainCard = (int) ((Math.random() * (num - 1)) + 0);
         while (mainCard == player1 || mainCard == player2) mainCard = (int) ((Math.random() * (num - 1)) + 0);
         card[0] = mainCard;
@@ -86,7 +85,6 @@ class ClientHandler implements Runnable{
     // Creating the client handler from the socket the server passes.
     public ClientHandler(Socket socket, Integer[] card) {
         try {
-            System.out.println("Konstruktor");
             this.socket = socket;
             this.bufferedReader = new DataInputStream((socket.getInputStream()));
             this.bufferedWriter= new DataOutputStream((socket.getOutputStream()));
@@ -98,6 +96,11 @@ class ClientHandler implements Runnable{
             System.out.println(clientHandlers.size());
             bufferedWriter.writeUTF(String.valueOf(clientHandlers.size()));
             bufferedWriter.flush();
+            if(clientHandlers.size()>1){
+                clientHandlers.get(0).bufferedWriter.writeUTF("OPPONENT JOIN");
+                bufferedWriter.flush();
+            }
+
 
             //initialize start cards
             bufferedWriter.writeUTF("START "+card[0]+ " "+ card[1] + " "+ card[2]);
