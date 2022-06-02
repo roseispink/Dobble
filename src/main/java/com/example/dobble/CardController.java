@@ -75,10 +75,6 @@ public class CardController {
     @FXML
     private Label yours;
 
-
-    @FXML
-    private Rectangle playerRec;
-
     @FXML
     private Rectangle stackRec;
 
@@ -88,13 +84,14 @@ public class CardController {
     Card stackCard =  new Card();
 
     String path = "";
-    private final int NUMBERS_OF_CARDS = 7;
+    private final int NUMBERS_OF_CARDS = 31;
     private int currentSizeStack = 0;
+    private int yourPoints = 0;
     private int points = NUMBERS_OF_CARDS-3;
-    ArrayList<ArrayList<String>> cardLayout = new ArrayList<>();
-    String fileName = "Cards.txt";
+    private final ArrayList<ArrayList<String>> cardLayout = new ArrayList<>();
+    private final String fileName = "Cards.txt";
 
-    Connect client = new Connect();
+    private final Connect client = new Connect();
     private boolean mainPlayer = true;
 
 
@@ -126,15 +123,13 @@ public class CardController {
                     textBar.setVisible(false);
                 }
                 if(mess.startsWith("TAKEN")) {
-                    String [] tab = mess.split(" ");
-                    int p = Integer.parseInt(tab[1]);
                     taken = true;
                     points--;
-                    Platform.runLater(() -> all.setText(String.valueOf(p)));
+                    Platform.runLater(() -> all.setText(String.valueOf(points)));
 
                     if(points==0) {
+                        client.sendToServer("POINTS "+yours.getText());
                         endGame();
-                        Platform.runLater(this::loss);
                     }
                     else {
                         for (int j = 0; j < 6; j++) {
@@ -144,6 +139,18 @@ public class CardController {
                         currentSizeStack++;
                         taken = false;
                     }
+                }
+                if (mess.startsWith("POINTS")){
+                    String [] tab = mess.split(" ");
+                    int opPoints = Integer.parseInt(tab[1]);
+                    if(opPoints> Integer.parseInt(yours.getText())) Platform.runLater(this::loss);
+                    else if(opPoints < Integer.parseInt(yours.getText())) Platform.runLater(this::win);
+                    else Platform.runLater(this::tie);
+                    break;
+                }
+                if (mess.equals("OPPONENT LEFT")){
+                    Platform.runLater(this::playerLeft);
+                    break;
                 }
                 if(mess.startsWith("START")){
                     String [] tab = mess.split(" ");
@@ -218,9 +225,10 @@ public class CardController {
                 System.out.println(points);
 
                 if(points==0){
-                    endGame();
                     all.setText(String.valueOf(points));
-                    yours.setText(String.valueOf(++currentSizeStack));
+                    yours.setText(String.valueOf(++yourPoints));
+                    client.sendToServer("POINTS "+yours.getText());
+                    endGame();
                     return;
                 }
                 for(int j = 0; j < 6; j++){
@@ -233,9 +241,10 @@ public class CardController {
 
                 taken = false;
                 currentSizeStack++;
+                yourPoints++;
 
                 all.setText(String.valueOf(points));
-                yours.setText(String.valueOf(currentSizeStack));
+                yours.setText(String.valueOf(yourPoints));
 
                 return;
             }
@@ -269,19 +278,45 @@ public class CardController {
         Dialog<String> dialog = new Dialog<>();
         dialog.setTitle("Koniec gry");
         ButtonType type = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
-        dialog.setContentText("Gratulacje wygrałeś! Aby zagrać ponownie przejdź do Menu");
+        dialog.setContentText("Gratulacje wygrałeś! Dobrej passy!!!");
         dialog.getDialogPane().getButtonTypes().add(type);
         dialog.showAndWait();
+        returnToMenu();
     }
 
     private void loss(){
         Dialog<String> dialog = new Dialog<>();
         dialog.setTitle("Koniec gry");
         ButtonType type = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
-        dialog.setContentText("Tym razem ci nie poszło :c Aby zagarać ponownie przejdź do Menu");
+        dialog.setContentText("Tym razem ci nie poszło :c Życzymy szczęścia natępnym razem");
         dialog.getDialogPane().getButtonTypes().add(type);
         dialog.showAndWait();
+        returnToMenu();
+    }
+    private void tie(){
+        Dialog<String> dialog = new Dialog<>();
+        dialog.setTitle("Koniec gry");
+        ButtonType type = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+        dialog.setContentText("Remis! Dzielnie walczyłeś");
+        dialog.getDialogPane().getButtonTypes().add(type);
+        dialog.showAndWait();
+        returnToMenu();
+    }
+    private void playerLeft(){
+        Dialog<String> dialog = new Dialog<>();
+        dialog.setTitle("Ups!");
+        ButtonType type = new ButtonType("Szkoda", ButtonBar.ButtonData.OK_DONE);
+        dialog.setContentText("Upsik twój przeciwnik opuścił grę. Gra skończona :/");
+        dialog.getDialogPane().getButtonTypes().add(type);
+        dialog.showAndWait();
+        returnToMenu();
+    }
 
+    private void returnToMenu(){
+        client.disconnect();
+        Stage stage = (Stage) toMenu.getScene().getWindow();
+        stage.close();
+        new HelloController().start();
     }
 
 
@@ -317,15 +352,18 @@ public class CardController {
 
     @FXML
     void exitAll() {
-        System.exit(0);
+        System.exit(-1);
     }
 
     @FXML
     void returnToMenu(ActionEvent event) {
+        client.disconnect();
         Stage stage = (Stage) toMenu.getScene().getWindow();
         stage.close();
         new HelloController().start();
     }
+
+
 
 
 }

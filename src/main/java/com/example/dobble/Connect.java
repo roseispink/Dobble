@@ -54,6 +54,12 @@ public class Connect {
     }
 
     public void disconnect(){
-
+        try {
+            bufferedWriter.close();
+            bufferedReader.close();
+            socketIn.close();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 }

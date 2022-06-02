@@ -97,8 +97,7 @@ class ClientHandler implements Runnable{
             bufferedWriter.writeUTF(String.valueOf(clientHandlers.size()));
             bufferedWriter.flush();
             if(clientHandlers.size()>1){
-                clientHandlers.get(0).bufferedWriter.writeUTF("OPPONENT JOIN");
-                bufferedWriter.flush();
+                broadcastMessage("OPPONENT JOIN");
             }
 
 
@@ -125,6 +124,7 @@ class ClientHandler implements Runnable{
                 System.out.println(messageFromClient);
                 broadcastMessage(messageFromClient);
             } catch (IOException e) {
+                broadcastMessage("OPPONENT LEFT");
                 // Close everything gracefully.
                 closeEverything(socket, bufferedReader, bufferedWriter);
                 break;
@@ -151,11 +151,6 @@ class ClientHandler implements Runnable{
         }
     }
 
-    // If the client disconnects for any reason remove them from the list so a message isn't sent down a broken connection.
-    public void removeClientHandler() {
-        clientHandlers.remove(this);
-        broadcastMessage("SERVER: " + clientUsername + " has left the chat!");
-    }
 
     // Helper method to close everything so you don't have to repeat yourself.
     public void closeEverything(Socket socket, DataInputStream bufferedReader, DataOutputStream bufferedWriter) {
@@ -165,9 +160,8 @@ class ClientHandler implements Runnable{
         // Closing the input stream closes the socket. You need to use shutdownInput() on socket to just close the input stream.
         // Closing the socket will also close the socket's input stream and output stream.
         // Close the socket after closing the streams.
-
-        // The client disconnected or an error occurred so remove them from the list so no message is broadcasted.
-        removeClientHandler();
+        clientHandlers.remove(this);
+        System.out.println("SERVER: " + clientUsername + " has left the chat!");
         try {
             if (bufferedReader != null) {
                 bufferedReader.close();
