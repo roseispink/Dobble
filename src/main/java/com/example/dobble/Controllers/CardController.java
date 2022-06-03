@@ -1,5 +1,7 @@
-package com.example.dobble;
+package com.example.dobble.Controllers;
 
+import com.example.dobble.Card;
+import com.example.dobble.Network.Connect;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -222,8 +224,6 @@ public class CardController {
                 showInfo(Color.GREEN);
                 client.sendToServer("TAKEN "+ (currentSizeStack + 1));
                 points--;
-
-                System.out.println(points);
 
                 if(points==0){
                     all.setText(String.valueOf(points));

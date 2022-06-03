@@ -1,5 +1,5 @@
 .stage{
-    -fx-background-image: url("tile_background.png");
+    -fx-background-image: url("../dodatki/tile_background.png");
 }
 
 .label{

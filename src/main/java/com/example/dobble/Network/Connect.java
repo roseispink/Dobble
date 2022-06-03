@@ -1,4 +1,4 @@
-package com.example.dobble;
+package com.example.dobble.Network;
 
 import java.net.Socket;
 
@@ -6,13 +6,11 @@ import java.io.*;
 
 public class Connect {
     Socket socketIn;
-    //private BufferedReader bufferedReader;
-    //private BufferedWriter bufferedWriter;
 
     private DataInputStream bufferedReader;
     private DataOutputStream bufferedWriter;
 
-    void connect() {
+    public void connect() {
         try {
             System.out.println("łączenie");
             socketIn = new Socket("localhost", 1234); // do odczytu
@@ -26,7 +24,7 @@ public class Connect {
         }
     }
 
-    void sendToServer(String string) {
+    public void sendToServer(String string) {
         if (bufferedWriter != null) {
             try {
                 bufferedWriter.writeUTF(string);
@@ -40,10 +38,9 @@ public class Connect {
         }
     }
 
-    String getFromServer() {
+    public String getFromServer() {
          String msgFromGroupChat;
-        // While there is still a connection with the server, continue to listen for messages on a separate thread.
-                // Get the messages sent from other users and print it to the console.
+
         try {
             msgFromGroupChat = bufferedReader.readUTF();
             System.out.println("received from server");

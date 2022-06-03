@@ -1,4 +1,4 @@
-package com.example.dobble;
+package com.example.dobble.Controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.RadioButton;
