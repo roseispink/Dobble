@@ -3,6 +3,7 @@
 }
 
 .button{
+    -fx-cursor: hand;
     -fx-background-color:
         linear-gradient(#616cbc, #4a5291),
         radial-gradient(center 50% -40%, radius 200%, #616cbc 45%, #4a5291 50%);
@@ -14,6 +15,9 @@
     -fx-font-family: "Helvetica";
 }
 
+.button:hover {
+    -fx-effect: dropshadow(three-pass-box,#4f589c,10,0.6,0,0);
+}
 .label{
     -fx-font-size: 40pt ;
     -fx-text-alignment: center ;

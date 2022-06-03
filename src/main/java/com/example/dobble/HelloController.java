@@ -6,10 +6,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
+import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -71,15 +69,17 @@ public class HelloController {
         }
         @FXML
         void premiumAccess(){
-            System.out.println("Siema");
-            Dialog<String> dialog = new Dialog<>();
-            dialog.setTitle("Dostęp premium");
-            ButtonType type = new ButtonType("OK!", ButtonBar.ButtonData.OK_DONE);
-            dialog.setContentText("Ta gra jest dostępna jedynie w wersji premium");
-            dialog.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("dialog.css")).toExternalForm());
-            dialog.getDialogPane().getStyleClass().add("myDialog");
-            dialog.getDialogPane().getButtonTypes().add(type);
-            dialog.showAndWait();
+            DialogPane dialog;
+            Alert alert  = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Dostęp premium");
+            alert.setHeaderText(null);
+            alert.setContentText("Ta gra jest dostępna jedynie w wersji premium!");
+            dialog = alert.getDialogPane();
+            dialog.getStylesheets().add(Objects.requireNonNull(getClass().getResource("dialog.css")).toString());
+            dialog.getStyleClass().add("myDialog");
+            ImageView image = new ImageView(Objects.requireNonNull(this.getClass().getResource("crown.png")).toString());
+            alert.setGraphic(image);
+            alert.showAndWait();
         }
 
         @FXML

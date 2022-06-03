@@ -21,6 +21,9 @@
     -fx-font-size: 11pt;
     -fx-font-family: "Helvetica";
 }
+.button:hover {
+    -fx-effect: dropshadow(three-pass-box,#4f589c,10,0.6,0,0);
+}
 
 .label1{
     -fx-font-size: 40pt ;
