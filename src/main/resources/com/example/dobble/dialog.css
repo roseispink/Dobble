@@ -17,3 +17,6 @@
     -fx-font-size: 10pt;
     -fx-font-family: "Helvetica";
 }
+.myDialog .button:hover{
+    -fx-effect: dropshadow(three-pass-box,#616cbc,10,0.6,0,0);
+}
