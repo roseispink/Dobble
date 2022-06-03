@@ -4,7 +4,6 @@
 }
 .myDialog > *.label.content{
     -fx-font-size: 14px;
-    -fx-font-weight: bold;
 }
 
 .myDialog .button{

@@ -81,5 +81,11 @@ public class HelloController {
             dialog.getDialogPane().getButtonTypes().add(type);
             dialog.showAndWait();
         }
+
+        @FXML
+        void goodBye(){
+            stage.close();
+            System.exit(0);
+        }
     }
 
