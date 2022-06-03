@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class CardController {
@@ -279,6 +280,8 @@ public class CardController {
         dialog.setTitle("Koniec gry");
         ButtonType type = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
         dialog.setContentText("Gratulacje wygrałeś! Dobrej passy!!!");
+        dialog.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("dialog.css")).toExternalForm());
+        dialog.getDialogPane().getStyleClass().add("myDialog");
         dialog.getDialogPane().getButtonTypes().add(type);
         dialog.showAndWait();
         returnToMenu();
@@ -289,6 +292,8 @@ public class CardController {
         dialog.setTitle("Koniec gry");
         ButtonType type = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
         dialog.setContentText("Tym razem ci nie poszło :c Życzymy szczęścia natępnym razem");
+        dialog.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("dialog.css")).toExternalForm());
+        dialog.getDialogPane().getStyleClass().add("myDialog");
         dialog.getDialogPane().getButtonTypes().add(type);
         dialog.showAndWait();
         returnToMenu();
@@ -298,6 +303,8 @@ public class CardController {
         dialog.setTitle("Koniec gry");
         ButtonType type = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
         dialog.setContentText("Remis! Dzielnie walczyłeś");
+        dialog.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("dialog.css")).toExternalForm());
+        dialog.getDialogPane().getStyleClass().add("myDialog");
         dialog.getDialogPane().getButtonTypes().add(type);
         dialog.showAndWait();
         returnToMenu();
@@ -307,6 +314,8 @@ public class CardController {
         dialog.setTitle("Ups!");
         ButtonType type = new ButtonType("Szkoda", ButtonBar.ButtonData.OK_DONE);
         dialog.setContentText("Upsik twój przeciwnik opuścił grę. Gra skończona :/");
+        dialog.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("dialog.css")).toExternalForm());
+        dialog.getDialogPane().getStyleClass().add("myDialog");
         dialog.getDialogPane().getButtonTypes().add(type);
         dialog.showAndWait();
         returnToMenu();

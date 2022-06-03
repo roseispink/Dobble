@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import java.io.IOException;
+import java.util.Objects;
 
 
 public class HelloController {
@@ -75,6 +76,8 @@ public class HelloController {
             dialog.setTitle("Dostęp premium");
             ButtonType type = new ButtonType("OK!", ButtonBar.ButtonData.OK_DONE);
             dialog.setContentText("Ta gra jest dostępna jedynie w wersji premium");
+            dialog.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("dialog.css")).toExternalForm());
+            dialog.getDialogPane().getStyleClass().add("myDialog");
             dialog.getDialogPane().getButtonTypes().add(type);
             dialog.showAndWait();
         }
