@@ -1,0 +1,19 @@
+.myDialog{
+    -fx-background-color:
+        linear-gradient(#f0c1be, #ff6a62)
+}
+.myDialog > *.label.content{
+    -fx-font-size: 14px;
+}
+
+.myDialog .button{
+    -fx-background-color:
+        linear-gradient(#616cbc, #4a5291),
+        radial-gradient(center 50% -40%, radius 200%, #616cbc 45%, #4a5291 50%);
+    -fx-background-radius: 6, 5;
+    -fx-background-insets: 0, 1;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
+    -fx-text-fill: #e6e6e8;
+    -fx-font-size: 10pt;
+    -fx-font-family: "Helvetica";
+}
